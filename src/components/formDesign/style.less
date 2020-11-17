@@ -1,0 +1,722 @@
+@primary-color: #409EFF;
+@primary-background-color: #ecf5ff;
+
+*, :after, :before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+// 整体结构
+.form-design{
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: space-between;
+    overflow: hidden;
+    background-color: #efefef;
+    .side{
+        position: absolute;
+        top: 0;
+        height: 100%;
+        z-index: 10;
+        &.left{
+            width: 300px;
+            left: 0;
+        }
+        &.right{
+            width: 350px;
+            right: -100%;
+            -webkit-transition: all .5s cubic-bezier(0,.8,.57,.89);
+            transition: all .5s cubic-bezier(0,.8,.57,.89);
+        }
+        &.open {
+            right: 0;
+        }
+    }
+    .content{
+        position: absolute;
+        left: 50%;
+        top: 0;
+        width: 490px;
+        height: 670px;
+        transform: translateX(-50%);
+        background-image: url('~@/assets/img/wapper-phone.png');
+        background-position: top;
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        overflow: hidden;
+    }
+}
+
+// 左侧组件列表样式
+.component-list{
+    height: inherit;
+    padding: 10px;
+    background: white;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    .title{
+        font-size: 12px;
+        color: #333;
+        padding-left: 5px;
+        border-left: 2px solid #5497D6;
+    }
+    ul{
+        width: inherit;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        margin: 10px 0;
+        overflow: hidden;
+        li{
+            width: 135px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px 10px;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            border: 1px solid rgba(204,204,204,1);
+            border-radius:4px;
+            font-size: 14px;
+            margin-bottom: 10px;
+            cursor: move;
+            &:hover{
+                border: 1px dashed #579ff8;
+                color: #579ff8;
+            }
+        }
+    }
+}
+
+// 中间表单设计区域样式
+.design-wapper {
+    width: 292px;
+    height: 480px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    border:1px solid rgba(204,204,204,1);
+    border-radius:10px;
+    background: transparent;
+    margin: 72px auto;
+    overflow: hidden;
+    .design-wapper-inner{
+        position: relative;
+        height: 480px;
+        .empty-phone{
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            background-repeat: no-repeat;
+            background-position: 50% 28%;
+            background-size: 239px 96px;
+            background-color: white;
+            height: 480px;
+            z-index: -1;
+            .tips{
+                margin-top: 200px;
+                text-align: center;
+                color: #999;
+                pointer-events: none;
+            }
+        }
+        
+        .design-form{
+            .widget-form-list{
+                height: 480px;
+                width: 100%;
+                overflow-x: hidden;
+                overflow-y: auto;
+            }
+        }
+        
+        .form-design-wapper-item{
+            position: relative;
+            border: 1px dashed transparent;
+            overflow: hidden;
+            margin: 15px 0;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            cursor: move;
+            &.active{
+                border: 1px solid @primary-color;
+            }
+            &.ghost{
+                background: #F56C6C;
+                border: 2px solid #F56C6C;
+                outline-width: 0;
+                height: 3px;
+                -webkit-box-sizing: border-box;
+                -moz-box-sizing: border-box;
+                box-sizing: border-box;
+                font-size: 0;
+                content: '';
+                overflow: hidden;
+                padding: 0;
+            }
+            .wrap{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                background: white;
+                padding: 10px 20px;
+                line-height: 1.5 !important;
+                .name, .plac{
+                    max-width: 130px;
+                }
+                .name, .plac, .text{
+                    overflow-wrap: anywhere;
+                    /*就是下面这一句，好像网上没有这一个的说明，但是浏览器都支持*/
+                    word-break: break-all;
+                    word-wrap: break-word;
+                }
+                .name{
+                    color: #333;
+                    &.number-unit{
+                        text-align: center;
+                    }
+                }
+                .plac, .text{
+                    color: #999;
+                }
+                .plac{
+                    display: flex;
+                    justify-content: flex-end;
+                    align-items: center;
+                    .icons{
+                        display: inline-block;
+                        font-size: 14px;
+                        transform: rotate(-90deg);
+                    }
+                }
+                &.capital{
+                    background-color: transparent;
+                    padding: 5px 20px;
+                    font-size: 12px;
+                    color: rgba(25,31,37,.4);
+                }
+                &.table-wapper{
+                    background: #ddeff3;
+                    padding: 0;
+                    min-height: 50px;
+                    // position: relative;
+                    .emptytip{
+                        position: absolute;
+                        left: 50%;
+                        top: 50%;
+                        width: 100%;
+                        padding: 0 8px;
+                        text-align: center;
+                        color: #ccc;
+                        -webkit-transform: translate(-50%,-50%);
+                        transform: translate(-50%,-50%);
+                    }
+                    .table-design{
+                        position: absolute;
+                        left: 0;
+                        right: 0;
+                        top: 0;
+                        bottom:0;
+                        width: 100%;
+                        .widget-table-list{
+                            position: absolute;
+                            left: 0;
+                            right: 0;
+                            top: 0;
+                            bottom: 0;
+                            min-height: 50px;
+                            padding: 41px 0 44px;
+                            height: auto;
+                            width: 100%;
+                            .form-design-wapper-item{
+                                margin: 0;
+                            }                        
+                        }
+                    }
+                }
+                &.add-detail{
+                    display: block;
+                    color: #008cee;
+                    text-align: center;
+                    width: 100%;
+                    background: #f7f9ff;
+                    background-color: white;
+                    .add-actoin{
+                        font-size: 14px;
+                        font-weight: 700;
+                    }
+                }
+            }
+            .widget-view-action{
+                position: absolute;
+                right: 0;
+                top: 0;
+                display: none;
+                width: 17px;
+                height: 17px;
+                background: #5497D6;
+                color: white;
+                overflow: hidden;
+                cursor: pointer;
+                .icon{
+                    display: block;
+                    font-size: 16px;
+                    line-height: normal;
+                }
+            }
+
+            &.hover{
+                border-color: @primary-color;
+                &>.ivu-form-item-content{
+                    &>.widget-view-action{
+                        display: block;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// 右侧属性区域
+.form-design-attribute{
+    background: #fff;
+    height: inherit;
+    width: 100%;
+    padding: 0 16px;
+    .attribute-head, .common-title, .common-plac{
+        box-shadow: inset 0 -1px 0 0 rgba(0,0,0,.09);
+        line-height: 46px;
+        height: 46px;
+        font-size: 14px;
+        color: #333;
+        vertical-align: baseline;
+        font-weight: 700;
+        padding: 0 16px;
+        margin: 0 -16px;
+        span{
+            font-size: 12px;
+            color: #999;
+            margin-left: 5px;
+        }
+    }
+    .attribute-body{
+        .common-tips{
+            font-size: 14px;
+            font-weight:700;
+            color: #333;
+            padding: 10px 0;
+            .icon{
+                color: #5497D6;
+                font-size: 14px;
+                cursor: pointer;
+            }
+            .ivu-tooltip-popper{
+                font-size: 12px;
+                .ivu-tooltip-inner-with-width{
+                    white-space: pre-line;
+                }
+            }
+        }
+        .attr-wrap{
+            box-shadow: none;
+            line-height: 1.5;
+            height: auto;
+            padding: 10px 0;
+        }
+        .common-title, .common-plac{
+            padding: 10px 16px;
+            .title{
+                margin-bottom: 5px;
+                font-size: 14px;
+                color: #333;
+                font-weight: 700;
+            }
+            .ivu-checkbox-focus {
+                box-shadow: none;
+            }
+        }
+        .single-input, .data, .money, .details{
+            span{
+                margin-left: 0 !important;
+            }
+        }
+        .single-input{
+            .icon{
+                color: #5497D6;
+                font-size: 14px;
+                cursor: pointer;
+            }
+            .ivu-tooltip-popper{
+                font-size: 12px;
+                .ivu-tooltip-inner-with-width{
+                    white-space: pre-line;
+                }
+            }
+            
+        }
+        .text, .number-input, .upload, .data, .rc-box, .money, .details{
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+        .text{
+            .title {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                .ivu-color-picker{
+                    .ivu-input-icon{
+                        display: none;
+                    }
+                    .ivu-input-icon-normal+.ivu-input {
+                        padding-right: 0px;
+                    }
+                    .ivu-color-picker-focused{
+                        -webkit-box-shadow: none;
+                        box-shadow: none;
+                    }
+                    .ivu-color-picker-rel {
+                        line-height: normal;
+                    }
+                    .ivu-input{
+                        padding: 0;
+                        height: auto;
+                        border: none; 
+                        border-radius: none; 
+                    }
+                    .ivu-color-picker-color{
+                        cursor: pointer;
+                    }
+                    .ivu-select-dropdown{
+                        left: 94px !important;
+                        top: 115px !important;
+                    }
+                    .ivu-btn {
+                        span{
+                            color: #515a6e;
+                            margin-left: 0;
+                        }
+                    }
+                    .ivu-btn-primary{
+                        span{
+                            color: #fff;
+                        }
+                    }
+                }
+            }
+        }
+        .number-input {
+            .checkbox-group, .dec-places{
+                span{
+                    margin-left: 0;
+                }
+                .title{
+                    span{
+                        margin-left: 5px;
+                    }
+                }
+            }
+            .dec-places{
+                .ivu-select-single {
+                    .ivu-select-selection, .ivu-select-placeholder{
+                        height: 32px;
+                    }
+                }
+            }
+        }
+        .upload {
+            .ivu-checkbox-group-item{
+                padding: 3px 0;
+                display: block;
+            }
+        }
+        .data{
+            .ivu-radio-wrapper{
+                padding: 3px 0;
+                display: block;
+            }
+            .data-duration{
+                padding: 5px 18px 5px 0;
+                margin-left: 20px;
+                .title span{
+                    margin-left: 5px !important;
+                }
+            }
+        }
+        .rc-box{
+            &-ul {
+                min-height: 100px;
+                max-height: e('calc(100vh - 500px)');
+                overflow-y: auto;
+                overflow-x: hidden;
+            }
+            li{
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                margin-bottom: 8px;
+                .ivu-input-with-prefix{
+                    padding-left: 37px;
+                }
+                .ivu-input-prefix{
+                    i{
+                        font-size: 14px;
+                        cursor: -webkit-grab;
+                        cursor: -moz-grab;
+                        cursor: grab;
+                    }
+                }
+                &:hover {
+                    input{
+                        border-color: #5497D6;
+                    }
+                }
+                .ivu-icon{
+                    font-weight: 700;
+                    color: #999;
+                    cursor: pointer;
+                    &.remove{
+                        margin: 0 5px;
+                    }
+                    &.add{
+                        color: #5497D6;
+                    }
+                }
+            }
+            .related{
+                display: inline-block;
+                color: #5497D6;
+                cursor: pointer;
+                margin-bottom: 0;
+                .color{
+                    color: #8400ff;
+                }
+            }
+        }
+        .money{
+            .formula{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                .colors{
+                    color: #5497D6;
+                    cursor: pointer;
+                }
+                .ivu-input-wrapper{
+                    cursor: pointer;
+                }
+            }
+            .formula-wrap{
+                display: block;
+                height: 32px;
+                line-height: 1.5;
+                padding: 4px 7px;
+                font-size: 14px;
+                border: 1px solid #dcdee2;
+                border-radius: 4px;
+                color: #515a6e;
+                cursor: pointer;
+                word-wrap: break-word;
+                word-break: break-all;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
+    }
+}
+
+// 单选框联动modal样式
+.modal-related{
+    .add-action{
+        margin-bottom: 5px;
+        p{ 
+            margin: 5px 0;
+            font-size: 14px;
+            color: #333;
+        }
+    }
+    .ivu-table-wrapper{
+        overflow: visible;
+        .ivu-select-multiple{
+            text-align: left;
+            .ivu-icon-ios-close{
+                color: #666 !important;
+            }
+        }
+    }
+}
+
+// 计算公式modal样式
+.modal-formula{
+    .editer-tips{
+        width: 510px;
+        margin: 0 auto;
+        color: red;
+        font-size: 14px;
+    }
+    .editer-wrapper{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 510px;
+        min-height: 100px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin: 0 auto 20px;
+        overflow: hidden;
+        padding: 10px;
+        .formula-screen{
+            span{
+                display: inline-block;
+                margin: 0 0 3px;
+            }
+            .span-object{
+                padding: 2px 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                margin: 0 2px 3px;
+            }
+            .span-label, .span-symbol{
+                margin: 0 2px 3px;
+            }
+        }
+        .formula-action{
+            text-align: right;
+            vertical-align: middle;
+            span {
+                cursor: pointer;
+                &:first-child{
+                    position: relative;
+                    border: 1px solid #e2e0e0;
+                    border-radius: 3px;
+                    padding: 0 5px;
+                    &::before, &::after{
+                        content: "";
+                        position: absolute;
+                        width:0;
+                        height:0;
+                        top: -1px
+                    }
+                    &::before{
+                        border: 8px solid #e2e0e0;
+                    }
+                    &::after{
+                        border: 8px solid white;
+                    }
+                    &::before, &::after{
+                        border-top-color:transparent;
+                        border-bottom-color:transparent;
+                        border-left-color:transparent;
+                    }
+                    &::before{
+                        right:calc(100% - 2px);
+                    }
+                    &::after{
+                        right:calc(100% - 11px);
+                    }
+                }
+                &:last-child{
+                    color: #f60;
+                }
+            }
+        }
+    }
+    .editer-object, .editer-symbol, .editer-number{
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        margin-bottom: 20px;
+        &:last-child{
+            margin-bottom: 0;
+        }
+        .title {
+            width: 100px;
+            text-align: right;
+            margin-right: 20px;
+        }
+        .content{
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            overflow: hidden;
+            .item {
+                width: 35px;
+                height: 25px;
+                border: 1px solid #ccc;
+                background-color: white;
+                border-radius: 5px;
+                margin-right: 10px;
+                margin-bottom: 10px;
+                line-height: 1.5;
+                text-align: center;
+                cursor: pointer;
+                &:last-child{
+                    margin-right: 0;
+                }
+                &:hover{
+                    background: #eee;
+                }
+            }
+        }
+    }
+    .editer-object{
+        .content{
+            width: 445px;
+            flex-wrap: wrap;
+            .item{
+                width: auto;
+                flex-shrink: 0;
+                padding: 0 10px;
+            }
+        }
+    }
+    .editer-number{
+        .content{
+            width: 126px;
+            flex-wrap: wrap;
+            .item{
+                flex-shrink: 0;
+                &:nth-child(3n) {
+                    margin-right: 0;
+                }
+            }
+        }
+    }
+}
+
+.slideInRight-enter-active, .slideInRight-leave-active{
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    transition: transform 300ms ease 0s;
+}
+
+.slideInRight-enter, .slideInRight-leave-to{
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0)
+}
+
+// 当拖动列表单元时会生成一个副本作为影子单元来模拟被拖动单元排序的情况
+.ghost{
+    background: #F56C6C;
+    border: 2px solid #F56C6C;
+    outline-width: 0;
+    height: 3px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 0;
+    content: '';
+    overflow: hidden;
+    padding: 0;
+}
+
+.ghost1{
+    opacity: 0;
+}
