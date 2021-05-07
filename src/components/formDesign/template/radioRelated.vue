@@ -208,8 +208,8 @@
                 
                 controlList = this.data.inTable ? InTableList : this.componentList
 
-
                 // 给所有表单控件添加 related 属性
+                // 此处将改变外部list数据 -- 增加了代码的不可阅读性，这很不好。
                 controlList.forEach(e => {
                     // Ⅰ、value.length == 0
                     if(!value.length) {
