@@ -25,7 +25,7 @@
                     <!-- 关联控件 -->
                     <template v-slot:related="{ row, index }">
                         <Select :value="row.related" clearable multiple style="width: 94%" @on-change="setRelated($event, index, row.related)">
-                            <Option v-for="(item, index) in list" :disabled="item.disabled" :value="item.key" :key="index">{{`${item.title}${item.title1 ? item.title1 : ''}`}}</Option>
+                            <Option v-for="(item, index) in list" :disabled="item.disabled" :value="item.key" :key="index" :tag="`${item.title}${item.title1 ? item.title1 : ''}`" :label="`${item.title}${item.title1 ? item.title1 : ''}`"></Option>
                         </Select>
                     </template>
                     <!-- 权限 -->
