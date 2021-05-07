@@ -24,7 +24,7 @@
                     </template>
                     <!-- 关联控件 -->
                     <template v-slot:related="{ row, index }">
-                        <Select v-model="row.related" clearable multiple style="width: 94%" @on-change="setRelated($event, index, row.related)">
+                        <Select :value="row.related" clearable multiple style="width: 94%" @on-change="setRelated($event, index, row.related)">
                             <Option v-for="(item, index) in list" :disabled="item.disabled" :value="item.key" :key="index">{{`${item.title}${item.title1 ? item.title1 : ''}`}}</Option>
                         </Select>
                     </template>
@@ -171,7 +171,7 @@
         methods: {
             // 状态控制
             getFaultModalStatusChange(e) {
-                this.$emit("StatusChange", e);
+                this.$emit("StatusChange", e)
             },
 
             // 添加一行
@@ -187,12 +187,12 @@
             },
 
             // 选项名改变
-            setValue(e, index, value) {
+            setValue(evt, index, value) {
                 this.$set(this.tableData[index], 'value', value)
             },
 
             // 关联控件改变
-            setRelated(e, index, value) {
+            setRelated(evt, index, value) {
                 let key = `${this.data.key}_${index}`,
                     related = this.tableData[index].related || [],
                     len = related.length,
@@ -235,11 +235,11 @@
                     }
                 })
                 
-                this.$set(this.tableData[index], 'related', value)
+                this.tableData[index].related = evt
             },
 
             // 权限改变
-            setLimits(e, index, value) {
+            setLimits(evt, index, value) {
                 this.$set(this.tableData[index], 'limits', value.id)
             },
 
@@ -254,7 +254,7 @@
                     // 更改外部数据
                     this.$set(this.data, 'options', ObjDeepCopy(this.tableData))
                 }
-                this.$emit('doSomething', false);
+                this.$emit('doSomething', false)
             },
         },
 

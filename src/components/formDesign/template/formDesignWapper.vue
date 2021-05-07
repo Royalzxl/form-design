@@ -107,6 +107,7 @@
                 // 获取下标
                 const newIndex = evt.newIndex
                 
+                
                 // 定义拖拽数据
                 let data = null
                 

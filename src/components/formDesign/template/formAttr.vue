@@ -227,7 +227,6 @@
     import FormulaEditer from './formulaEditer.vue'
     import CustomCheckbox from './customCheckbox'
     import CustomRadioGroup from './customRadioGroup'
-    import { ObjDeepCopy } from '../common/utils'
     export default {
         name: '',
         components: {
